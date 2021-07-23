@@ -1,0 +1,234 @@
+<!doctype html>
+<!--- Author: Cseca Gazzolo !-->
+<!--- Date created: 07/20/2021 !-->
+<!--- Date updated: 07/20/2021 -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <meta name=author content="Cseca Gazzolo">
+    <title>Calculator</title>
+</head>
+<body>
+    <div id="calc-div">
+        <div id="display-div">
+            <span id="display-text">0</span>
+        </div>
+        
+        <div id="clear-equals-div">
+            <button type="button" id="clear-btn">Clear</button>
+            <button type="button" id="equals-btn">=</button>
+        </div>
+
+        <div id="keypad-div">
+            <div id="numbers-div">
+                <div id="num-row1" class="num-row">
+                    <button type="button" id="btn-1" class="num-btn">1</button>
+                    <button type="button" id="btn-2" class="num-btn">2</button>
+                    <button type="button" id="btn-3" class="num-btn">3</button>
+                </div>
+                <div id="num-row2" class="num-row">
+                    <button type="button" id="btn-4" class="num-btn">4</button>
+                    <button type="button" id="btn-5" class="num-btn">5</button>
+                    <button type="button" id="btn-6" class="num-btn">6</button>
+                </div>
+                <div id="num-row3" class="num-row">
+                    <button type="button" id="btn-7" class="num-btn">7</button>
+                    <button type="button" id="btn-8" class="num-btn">8</button>
+                    <button type="button" id="btn-9" class="num-btn">9</button>
+                </div>
+                <div id="num-row4" class="num-row">
+                    <button type="button" id="btn-0" class="num-btn">0</button>
+                    <button type="button" id="decimal-btn" class="modify-btn">.</button>
+                    <button type="button" id="negative-btn" class="modify-btn">+/-</button>
+                </div>
+            </div>
+
+            <div id="operator-div">
+                <div id="ops-row1" class="ops-row">
+                    <button type="button" id="add-btn" class="op-btn">+</button>
+                    <button type="button" id="subtract-btn" class="op-btn">-</button>
+                </div>
+                <div id="ops-row2" class="ops-row">
+                    <button type="button" id="multiply-btn" class="op-btn">x</button>
+                    <button type="button" id="divide-btn" class="op-btn">÷</button>
+                </div>
+                <div id="ops-row3" class="ops-row">
+                    <button type="button" id="square-btn" class="op-btn">x²</button>
+                    <button type="button" id="power-btn" class="op-btn">xⁿ</button>
+                </div>
+                <div id="ops-row4" class="ops-row">
+                    <button type="button" id="sqrt-btn" class="op-btn">√x</button>
+                    <button type="button" id="backspace-btn">←</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+
+    /** MATH FUNCTIONS **/
+    function add(num1, num2){
+        return num1 + num2;
+    }
+
+    function subtract(num1, num2){
+        return num1 - num2;
+    }
+
+    function multiply(num1, num2){
+        return num1 * num2;
+    }
+
+    function divide(num1, num2){
+        if(num2 === 0){
+            alert("ERROR: Divide by zero.");
+        }
+        return num1 / num2;
+    }
+
+    function power(num1, num2){
+        return num1 ** num2;
+    }
+
+    function square(num1){
+        return power(num1, 2);
+    }
+
+    function squareroot(num1){
+        return Math.sqrt(num1);
+    }
+
+    function operate(operator, num1, num2){
+        if(operator === "+"){
+            return add(num1, num2);
+        }else if(operator === "-"){
+            return subtract(num1, num2);
+        }else if(operator === "x"){
+            return multiply(num1, num2);
+        }else if(operator === "÷"){
+            return divide(num1, num2);
+        }else if(operator === "x²"){
+            return square(num1);
+        }else if(operator === "xⁿ"){
+            return power(num1, num2);
+        }else if(operator === "√x"){
+            return squareroot(num1);
+        }else{
+            alert("ERROR: Operator not recognized.");
+        }
+    }
+
+
+    /** CALCULATOR FUNCTIONALITY **/
+    const numButtons = document.querySelectorAll(".num-btn");
+    const opButtons = document.querySelectorAll(".op-btn");
+    
+    const display = document.getElementById("display-text");
+    
+    const backspace = document.getElementById("backspace-btn");
+    const clear = document.getElementById("clear-btn");
+    const negative = document.getElementById("negative-btn");
+    const decimal = document.getElementById("decimal-btn");
+    const equals = document.getElementById("equals-btn");
+
+    const MAX_LENGTH = 18;
+
+    let displayValue = display.textContent;
+    let firstValue = 0;
+    let secondValue = 0;
+    let opValue = "*";
+    let opOn = false;
+    let equalsJustPressed = false;
+
+    function addNumButtonsListeners(){
+        numButtons.forEach(function (button) {
+            button.addEventListener("click", function(){
+                if(!(display.textContent.length >= MAX_LENGTH)){
+                    if(display.textContent === "0" || opOn){
+                        display.textContent = button.textContent;
+                        opOn = false;
+                    } else {
+                        display.textContent += button.textContent;
+                    }
+                    displayValue = display.textContent;
+                }
+            });
+        });
+    }
+
+    function addOpButtonsListeners(){
+        opButtons.forEach(function (button) {
+            button.addEventListener("click", function() {
+                if(!opOn){
+                    opValue = button.textContent;
+                    firstValue = displayValue;
+                    opOn = true;
+                }
+            });
+        });
+    }
+
+    function addBackspaceListener(){
+        backspace.addEventListener("click", function() {
+            if(display.textContent.length <= 1){
+                display.textContent = "0";
+            }else{
+                display.textContent = display.textContent.slice(0, -1);
+            }
+        });
+    }   
+
+    function addClearListener(){
+        clear.addEventListener("click", function() {
+            display.textContent = "0";
+        });
+    }
+    
+    function addNegativeListener(){
+        negative.addEventListener("click", function() {
+            display.textContent = "-" + display.textContent;
+        });
+    }
+
+    function addDecimalListener(){
+        decimal.addEventListener("click", function() {
+            if(!display.textContent.includes(".")) {
+                display.textContent += ".";
+            }
+        });
+    }
+
+    function addEqualsListener(){
+        equals.addEventListener("click", function() {
+            opOn = false;
+            secondValue = displayValue;
+            let answer = operate(opValue, Number(firstValue), Number(secondValue));
+            display.textContent = answer;
+            displayValue = answer;
+        });
+    }
+
+    function initializeEventListeners(){
+        addNumButtonsListeners();
+        addOpButtonsListeners();
+        addBackspaceListener();
+        addClearListener();
+        addNegativeListener();
+        addDecimalListener();
+        addEqualsListener();
+    }
+
+    initializeEventListeners();
+
+    /** TODO:
+     * Handle bugs in single-num ops (square root, square)
+     * Display certain number of decimals
+     * Handle multiple clicks on equals button
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+html {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(
+        45deg, #fffde7 0%, 
+        #fff9c4 20%, 
+        #fff59d 40%,
+        #fff59d 60%,
+        #fff9c4 80%,
+        #fffde7 100%
+    );
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+#calc-div {
+    height: 80%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2%;
+    padding: 15px;
+    background: linear-gradient(
+        315deg, rgba(239,154,154,1) 0%, 
+        rgba(255,171,145,1) 6.25%, 
+        rgba(255,204,128,1) 12.5%, 
+        rgba(255,224,130,1) 18.75%, 
+        rgba(255,245,157,1) 25%, 
+        rgba(230,238,156,1) 31.25%, 
+        rgba(197,225,165,1) 37.5%, 
+        rgba(165,214,167,1) 43.75%, 
+        rgba(128,203,196,1) 50%, 
+        rgba(128,222,234,1) 56.25%, 
+        rgba(129,212,250,1) 62.5%, 
+        rgba(144,202,249,1) 68.75%, 
+        rgba(159,168,218,1) 75%, 
+        rgba(179,157,219,1) 81.25%, 
+        rgba(206,147,216,1) 87.5%, 
+        rgba(244,143,177,1) 93.75%, 
+        rgba(239,154,154,1) 100%);
+}
+
+#display-div {
+    height: 15%;
+    margin: 20px;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+#clear-equals-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+#keypad-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+#numbers-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    margin: 20px;
+}
+
+#operator-div {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    width: 30%;
+    margin: 20px;
+}
+
+.num-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.ops-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#display-text {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 36px;
+}
+
+/** BUTTONS **/
+button {
+    height: 60px;
+    width: 60px;
+    font-size: 24px;
+    border: none;
+    border-radius: 100%;
+    background-color: #f5f5f5;
+}
+
+button:hover {
+    background: linear-gradient(
+        45deg, rgba(239,154,154,1) 0%, 
+        rgba(255,171,145,1) 6.25%, 
+        rgba(255,204,128,1) 12.5%, 
+        rgba(255,224,130,1) 18.75%, 
+        rgba(255,245,157,1) 25%, 
+        rgba(230,238,156,1) 31.25%, 
+        rgba(197,225,165,1) 37.5%, 
+        rgba(165,214,167,1) 43.75%, 
+        rgba(128,203,196,1) 50%, 
+        rgba(128,222,234,1) 56.25%, 
+        rgba(129,212,250,1) 62.5%, 
+        rgba(144,202,249,1) 68.75%, 
+        rgba(159,168,218,1) 75%, 
+        rgba(179,157,219,1) 81.25%, 
+        rgba(206,147,216,1) 87.5%, 
+        rgba(244,143,177,1) 93.75%, 
+        rgba(239,154,154,1) 100%);
+}
+
+#clear-btn {
+    width: 50%;
+    margin: 20px;
+    border-radius: 0;
+}
+
+#equals-btn {
+    width: 30%;
+    margin: 20px;
+    border-radius: 0;
+}
+
+/* .num-btn {
+    background-color: #9ccc65;
+}
+
+.op-btn {
+    background-color: #b39ddb;
+}
+
+.modify-btn {
+    background-color: #fff176;
+}
+
+#backspace-btn {
+    background-color: #ef9a9a
+} */
